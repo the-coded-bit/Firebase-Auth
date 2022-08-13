@@ -1,0 +1,73 @@
+.login__form__container{
+    background-color: #ffffff;
+    width: 40%;
+    height: 50%;
+}
+
+.login__form__placeholder__container{
+    margin: 20px;
+}
+
+.login__logo{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+.login__heading{
+    margin-top: 16px;
+    text-align: center;
+    font-family: 'Work Sans';
+    font-size: 28px;
+    font-weight: 800;
+    color: rgb(17, 24, 39);
+}
+
+.login__fields{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    height: 100%;
+}
+
+input{
+    display: block;
+    height: 20px;
+    width: 60%;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgb(79 70 229);
+    font-family: 'Work Sans';
+}
+
+input[type=file]{
+    display: none;
+}
+
+button, label{
+    height: 30px;
+    width: 62%;
+    background-color: rgb(79 70 229);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Work Sans';
+    font-weight: 700;
+}
+
+span{
+    font-family: 'Work Sans';
+}
+
+.signup__button{
+    cursor: pointer;
+    color: rgb(79 70 229);
+}
+
