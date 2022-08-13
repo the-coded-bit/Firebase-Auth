@@ -59,6 +59,7 @@ function HomePage() {
                 await uploadBytes(profileRef, file);
                 const profileUrl = await getDownloadURL(ref(storage, `profilePictures/${authUser.uid}`));
                 await updateProfile(authUser, { photoURL: profileUrl });
+                await updateCurrentUser(auth, authUser);
 
             } catch (error) {
                 console.log('could not upload profile pic');
