@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { options } from '../../utils/constants';
+import { authContext } from '../../utils/contexts/AuthWrapper';
 import Signup from '../Signup';
 import './login.css';
 
@@ -13,26 +14,43 @@ function Login() {
     // state to maintain password entered
     const [password, setPassword] = useState('');
 
+    //get login function, authUser, setAuthUser, loading from context
+    const { login, setUser, setLoading } = useContext(authContext);
+
     const toogleAutOption = () => {
         setLoginPage(!loginPage);
     }
 
     // handle email and password inputs
-    const handleEmailPassword = (type, e) =>{
+    const handleEmailPassword = (type, e) => {
         switch (type) {
             case options.EMAIL:
                 setEmail(e.target.value);
                 break;
-        
+
             case options.PASSWORD:
                 setPassword(e.target.value);
                 break;
+
+             default:
+                break;   
         }
     }
 
     // handle log in
-    const handleLogin = () =>{
-        
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        if (email !== '' && password !== '') {
+            setLoading(true);
+            try {
+                const loginUser = await login(email, password);
+                setUser(loginUser.user);
+            } catch (error) {
+                console.log('user do not exist');
+            }
+            setLoading(false);
+        }
+
     }
     return (
         loginPage ?
@@ -45,9 +63,9 @@ function Login() {
                     />
                     <h2 className="login__heading">Log in to your account</h2>
                     <div className='login__fields'>
-                        <input id='email-address' name='email' type='email' required={true} spellCheck={false} placeholder='Email address' onChange={(e) => handleEmailPassword(options.EMAIL,e)}/>
-                        <input id='password' name='email' type='password' required={true} spellCheck={false} placeholder='Password' onChange={(e) => handleEmailPassword(options.PASSWORD,e)}/>
-                        <button>Log In</button>
+                        <input id='email-address' name='email' type='email' required={true} spellCheck={false} placeholder='Email address' onChange={(e) => handleEmailPassword(options.EMAIL, e)} />
+                        <input id='password' name='email' type='password' required={true} spellCheck={false} placeholder='Password' onChange={(e) => handleEmailPassword(options.PASSWORD, e)} />
+                        <button onClick={(e) => handleLogin(e)}>Log In</button>
                         <span>Didn't have an Account? <span className='signup__button' onClick={() => toogleAutOption()}>Signup</span></span>
                     </div>
 

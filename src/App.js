@@ -1,10 +1,15 @@
+import { useContext } from 'react';
 import './App.css';
-import { Login, Signup } from './components';
+import { HomePage, Login } from './components';
+import { authContext } from './utils/contexts/AuthWrapper';
 
 function App() {
+  const {authUser} = useContext(authContext);
   return (
     <main className="App">
-      <Login />
+      {
+        authUser == null? <Login /> : <HomePage />
+      }
     </main>
   );
 }
